@@ -6,10 +6,10 @@ import time
 import json
 
 current_milli_time = lambda: int(round(time.time() * 1000))
-def DownloadLineTV(dramaID, episodeID):
+def DownloadLineTV(dramaID, episodeID, **kwargs):
     web_link = 'https://www.linetv.tw/api/part/{dramaID}/eps/{episodeID}/part/'.format(dramaID=dramaID, episodeID=episodeID)
     video_info = json.loads(requests.get(web_link).content)
-    m3u8_link = video_info['epsInfo']['source'][0]['links'][0]['link']
+    m3u8_link = kwargs['m3u8_link'] or video_info['epsInfo']['source'][0]['links'][0]['link']
     m3u8_link = m3u8_link.split('_',1)[0]+'_FHD.m3u8'
     # Getting key for video
     get_token_data = {'keyId': video_info['epsInfo']['source'][0]['links'][0]['keyId'], 'keyType': video_info['epsInfo']['source'][0]['links'][0]['keyType']}
@@ -63,6 +63,7 @@ if not os.path.exists('decrypted'):
 
 
 # CHANGE HERE
-dramaID = 11354
-for k in range(1,19):
-    DownloadLineTV(dramaID,k)
+dramaID = 10738
+#for k in range(4,31):
+#    DownloadLineTV(dramaID,k)
+DownloadLineTV(dramaID,3, m3u8_link='https://d3c7rimkq79yfu.cloudfront.net/10738/3/v3/10738-eps-3_FHD.m3u8')
