@@ -64,6 +64,6 @@ if not os.path.exists('decrypted'):
 
 # CHANGE HERE
 dramaID = 11354
-for k in range(25,27):
+for k in range(39, 41):
     DownloadLineTV(dramaID,k)
 #DownloadLineTV(dramaID,3, m3u8_link='https://d3c7rimkq79yfu.cloudfront.net/10738/3/v3/10738-eps-3_FHD.m3u8')
